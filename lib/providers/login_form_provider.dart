@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dignal_2025/services/my_server.dart';
+import 'package:http/http.dart' as http;
 
 class LoginFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -24,11 +26,23 @@ class LoginFormProvider extends ChangeNotifier {
   login() async {
     _isLoading = true;
     notifyListeners();
+    // Implementación del paquete http, para hacer 
+    // peticiones al endpoint del login.
+    // http://localhost:88	/api/login
+    // var url = Uri.http('192.168.1.152:88', '/api/login');
+    // var response = await http.post(url, body: {
+    //   'username': username,
+    //   'password': password
+    // });
 
-    await Future.delayed(Duration(seconds: 2));
+    final response = await MyServer().login(
+      username: username,
+      password: password,
+    );
 
     isLoading = false;
     notifyListeners();
-    return true;
+
+    return response;
   }
 }
