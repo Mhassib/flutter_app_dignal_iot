@@ -3,6 +3,8 @@ import 'package:flutter_dignal_2025/providers/login_form_provider.dart';
 import 'package:flutter_dignal_2025/screens/app/dashbord_screen.dart';
 import 'package:flutter_dignal_2025/screens/app/screens.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert' as convert;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -105,22 +107,13 @@ class LoginForm extends StatelessWidget {
                   : () async {
                       FocusManager.instance.primaryFocus?.unfocus();
                       if (loginProvider.validate()) {
+                        
+                        
                         final response = await loginProvider.login();
-                        if (response) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(DashboardScreen.route);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                "Hubo un error en la solicitud",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              backgroundColor: Colors.red,
-                              behavior: SnackBarBehavior.floating,
-                            ),
-                          );
-                        }
+
+                        await validateResponse(response, context);
+
+
                       }
                     },
               child: Padding(
@@ -144,4 +137,46 @@ class LoginForm extends StatelessWidget {
       ),
     );
   }
+}
+
+
+
+Future<void> validateResponse(response, context) async {
+  // Posibles respuestas del endpoint '/api/login'
+  // 200 -> autorizado
+  // 401 -> no autorizo
+
+  // response sin decodificar
+  // "{'message': 'Hola'}"
+
+  // response decodificado -> objeto json
+  // {
+  //   'message': 'Hola',
+  // }
+
+  var decodeData = convert.jsonDecode(response.body) as Map<String, dynamic>;
+
+  if (response.statusCode == 200) {
+    // Creando una instancia de la librería para almecenar datos en mi dispositivo.
+    final prefs = await SharedPreferences.getInstance();
+    // Almacenando los datos del usuario.
+    prefs.setInt('userId', decodeData['data']['user']['id']);
+    prefs.setString('user', decodeData['data']['user']['username']);
+    prefs.setString('token', decodeData['data']['token']);
+
+    Navigator.of(context).pushReplacementNamed(DashboardScreen.route);
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          decodeData['message'],
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+
 }
