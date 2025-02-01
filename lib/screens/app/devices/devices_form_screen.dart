@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dignal_2023/providers/device_form_provider.dart';
-import 'package:flutter_dignal_2023/providers/devices_provider.dart';
-import 'package:flutter_dignal_2023/widgets/custom_button_loading.dart';
+import 'package:flutter_dignal_2025/providers/device_form_provider.dart';
+import 'package:flutter_dignal_2025/providers/devices_provider.dart';
+import 'package:flutter_dignal_2025/widgets/custom_button_loading.dart';
 import 'package:provider/provider.dart';
 
 class DevicesFormScreen extends StatelessWidget {
@@ -14,13 +14,13 @@ class DevicesFormScreen extends StatelessWidget {
     final devicesProvider = Provider.of<DevicesProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Devices Form'),
+        title: const Text('Crear dispositivo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ChangeNotifierProvider(
           create: (_) => DeviceFormProvider(devicesProvider.selectedDevice),
-          child: const DeviceForm(),
+          child: DeviceForm(),
         ),
       ),
     );
@@ -28,9 +28,13 @@ class DevicesFormScreen extends StatelessWidget {
 }
 
 class DeviceForm extends StatelessWidget {
-  const DeviceForm({
-    Key? key,
-  }) : super(key: key);
+  DeviceForm({
+    super.key,
+  });
+
+  final borderInputTextDecoration = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(30)
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +47,14 @@ class DeviceForm extends StatelessWidget {
           TextFormField(
             initialValue: device.name,
             decoration: InputDecoration(
-                labelText: 'Name',
-                errorText: deviceForm.errors.containsKey('name')
-                    ? deviceForm.errors['name'][0]
-                    : null),
+              border: borderInputTextDecoration,
+              labelText: 'Name',
+              errorText: deviceForm.errors.containsKey('name')
+                  ? deviceForm.errors['name'][0]
+                  : null),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                // return 'This field is required';
+                return 'Este campo es requerido';
               }
               return null;
             },

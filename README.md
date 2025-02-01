@@ -1,16 +1,25 @@
-# flutter_dignal_2023
+# Flutter | App Dignal iot
 
-A new Flutter project.
+<div style="text-align: center">
+    <img src="https://academy.dignal.com/wp-content/uploads/2023/01/dignal_academy_logo_site.png" width="400" alt="Dignal Academy"/>
+</div>
 
-## Getting Started
+## Contenido
 
-This project is a starting point for a Flutter application.
+- Este repositorio contiene el maquetado de las pantallas de nuestra app iot: login, usuarios, dispositivos, etc.
 
-A few resources to get you started if this is your first Flutter project:
+# Instalación
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Para iniciar debes clonar este repositorio en tu equipo por medio del siguiente comando de git:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+git@github.com:Dignal-Electronics/flutter_app_dignal_iot.git
+```
+
+- Luego debes de instalar las dependencias del proyecto debes ejecutar el siguiente comando:
+
+```
+flutter pub get
+```
+
+- Ahora debes "correr tu aplicación".

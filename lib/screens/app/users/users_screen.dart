@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dignal_2023/models/models.dart';
-import 'package:flutter_dignal_2023/providers/users_provider.dart';
-import 'package:flutter_dignal_2023/screens/app/screens.dart';
+import 'package:flutter_dignal_2025/models/models.dart';
+import 'package:flutter_dignal_2025/models/user_model.dart';
+import 'package:flutter_dignal_2025/providers/users_provider.dart';
+import 'package:flutter_dignal_2025/screens/app/screens.dart';
+import 'package:flutter_dignal_2025/screens/app/users/users_form_screen.dart';
 import 'package:provider/provider.dart';
 
 class UsersScreen extends StatelessWidget {
@@ -14,7 +16,7 @@ class UsersScreen extends StatelessWidget {
     final usersProvider = Provider.of<UsersProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Users'),
+        title: const Text('Usuarios'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
@@ -69,7 +71,7 @@ class UsersScreen extends StatelessWidget {
                                   Navigator.of(context).pop();
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  primary:
+                                  backgroundColor:
                                       user.active ? Colors.red : Colors.green,
                                 ),
                                 child: Text(action.toUpperCase()),

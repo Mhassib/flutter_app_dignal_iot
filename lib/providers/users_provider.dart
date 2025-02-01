@@ -1,5 +1,6 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_dignal_2023/models/models.dart';
+import 'package:flutter_dignal_2025/models/models.dart';
 
 class UsersProvider extends ChangeNotifier {
   UsersProvider() {
@@ -7,15 +8,15 @@ class UsersProvider extends ChangeNotifier {
   }
 
   late User selectedUser;
-  // List<User> users = List.generate(
-  //   16,
-  //   (index) => User(
-  //     id: index,
-  //     name: 'User ${index + 1}',
-  //     username: 'Username $index',
-  //     active: Random().nextBool(),
-  //   ),
-  // );
+  List<User> users = List.generate(
+    16,
+    (index) => User(
+      id: index,
+      name: 'User ${index + 1}',
+      username: 'Username $index',
+      active: Random().nextBool(),
+    ),
+  );
   bool _isLoading = false;
   get isLoading => _isLoading;
   set isLoading(val) {
@@ -23,7 +24,7 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<User> users = [];
+  // List<User> users = [];
 
   getUsers() async {
     print('getUsers');

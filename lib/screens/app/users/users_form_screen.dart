@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dignal_2023/providers/user_form_provider.dart';
-import 'package:flutter_dignal_2023/providers/users_provider.dart';
+import 'package:flutter_dignal_2025/providers/user_form_provider.dart';
+import 'package:flutter_dignal_2025/providers/users_provider.dart';
 import 'package:provider/provider.dart';
 
 class UsersFormScreen extends StatelessWidget {
@@ -13,13 +13,13 @@ class UsersFormScreen extends StatelessWidget {
     final userProvider = Provider.of<UsersProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Users Form'),
+        title: const Text('Crear usuario'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ChangeNotifierProvider(
           create: (_) => UserFormProvider(userProvider.selectedUser),
-          child: const UserForm(),
+          child: UserForm(),
         ),
       ),
     );
@@ -27,9 +27,11 @@ class UsersFormScreen extends StatelessWidget {
 }
 
 class UserForm extends StatelessWidget {
-  const UserForm({
-    Key? key,
-  }) : super(key: key);
+  UserForm({super.key});
+
+  final borderInputTextDecoration = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(30)
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -42,33 +44,45 @@ class UserForm extends StatelessWidget {
         children: [
           TextFormField(
             initialValue: user.name,
-            decoration: InputDecoration(labelText: 'Name', errorText: null),
+            decoration: InputDecoration(
+              border: borderInputTextDecoration,
+              labelText: 'Nombre',
+              errorText: null
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'This field is required';
+                return 'Este campo es requerido';
               }
               return null;
             },
             onSaved: (value) => user.name = value!,
           ),
+          SizedBox(height: 20,),
           TextFormField(
             initialValue: user.username,
-            decoration: InputDecoration(labelText: 'User Name'),
+            decoration: InputDecoration(
+              border: borderInputTextDecoration,
+              labelText: 'Nombre de usuario'
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'This field is required';
+                return 'Este campo es requerido';
               }
               return null;
             },
             onSaved: (value) => user.username = value!,
           ),
+          SizedBox(height: 20,),
           TextFormField(
             initialValue: user.password,
-            decoration: InputDecoration(labelText: 'Password'),
+            decoration: InputDecoration(
+              border: borderInputTextDecoration,
+              labelText: 'Contraseña'
+            ),
             validator: (value) {
               if (user.id == null) {
                 if (value == null || value.isEmpty) {
-                  return 'This field is required';
+                  return 'Este campo es requerido';
                 }
               }
 

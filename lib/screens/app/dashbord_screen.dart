@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dignal_2023/providers/devices_provider.dart';
-import 'package:flutter_dignal_2023/providers/users_provider.dart';
-import 'package:flutter_dignal_2023/screens/app/screens.dart';
-import 'package:flutter_dignal_2023/widgets/custom_drawer.dart';
+import 'package:flutter_dignal_2025/providers/devices_provider.dart';
+import 'package:flutter_dignal_2025/providers/users_provider.dart';
+import 'package:flutter_dignal_2025/screens/app/screens.dart';
+import 'package:flutter_dignal_2025/widgets/custom_drawer.dart';
 import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -23,9 +23,7 @@ class DashboardScreen extends StatelessWidget {
 }
 
 class _DashboardBody extends StatelessWidget {
-  const _DashboardBody({
-    Key? key,
-  }) : super(key: key);
+  const _DashboardBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +33,17 @@ class _DashboardBody extends StatelessWidget {
     final devicesRoute = DevicesScreen.route;
 
     return GridView.count(
-      // Create a grid with 2 columns. If you change the scrollDirection to
-      // horizontal, this produces 2 rows.
       crossAxisCount: 2,
       mainAxisSpacing: 20,
       crossAxisSpacing: 20,
       padding: const EdgeInsets.all(20),
-      // Generate 100 widgets that display their index in the List.
       children: [
         InkWell(
           onTap: () => Navigator.of(context).pushNamed(usersRoute),
           child: CustomSectionDataCard(
             value: "${users.length}",
             color: Colors.red.shade200,
-            section: 'Users',
+            section: 'Usuarios',
             icon: Icons.people,
           ),
         ),
@@ -57,8 +52,8 @@ class _DashboardBody extends StatelessWidget {
           child: CustomSectionDataCard(
             value: "${devices.length}",
             color: Colors.purple.shade200,
-            icon: Icons.device_hub_sharp,
-            section: 'Devices',
+            icon: Icons.memory,
+            section: 'Dispositivos',
           ),
         ),
       ],
@@ -73,12 +68,12 @@ class CustomSectionDataCard extends StatelessWidget {
   final IconData? icon;
 
   const CustomSectionDataCard({
-    Key? key,
+    super.key,
     required this.value,
     this.section = '',
     required this.color,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

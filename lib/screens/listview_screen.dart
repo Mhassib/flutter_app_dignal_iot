@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dignal_2023/screens/estados_provider_screen.dart';
-import 'package:flutter_dignal_2023/screens/estados_screen.dart';
-import 'package:flutter_dignal_2023/screens/mensajes_screen.dart';
-import 'package:flutter_dignal_2023/screens/widgets_estructura_screen.dart';
-import 'package:flutter_dignal_2023/screens/formularios_screen.dart';
+import 'package:flutter_dignal_2025/screens/estados_provider_screen.dart';
+import 'package:flutter_dignal_2025/screens/estados_screen.dart';
+import 'package:flutter_dignal_2025/screens/mensajes_screen.dart';
+import 'package:flutter_dignal_2025/screens/widgets_estructura_screen.dart';
+import 'package:flutter_dignal_2025/screens/formularios_screen.dart';
 
 class ListviewScreen extends StatelessWidget {
   const ListviewScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dignal_2023/models/models.dart';
-import 'package:flutter_dignal_2023/providers/devices_provider.dart';
-import 'package:flutter_dignal_2023/screens/app/screens.dart';
+import 'package:flutter_dignal_2025/models/models.dart';
+import 'package:flutter_dignal_2025/providers/devices_provider.dart';
+import 'package:flutter_dignal_2025/screens/app/screens.dart';
 import 'package:provider/provider.dart';
 
 class DevicesScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class DevicesScreen extends StatelessWidget {
     final devices = deviceProvider.devices;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Devices'),
+        title: const Text('Dispositivos'),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),

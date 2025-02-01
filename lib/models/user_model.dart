@@ -11,20 +11,21 @@ class User {
   String password;
   bool active;
 
-  User(
-      {this.id,
-      this.name = '',
-      this.username = '',
-      this.password = '',
-      this.active = true});
+  User({
+    this.id,
+    this.name = '',
+    this.username = '',
+    this.password = '',
+    this.active = true
+  });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        name: json["name"],
-        username: json["username"],
-        password: '',
-        active: json["active"],
-      );
+    id: json["id"],
+    name: json["name"],
+    username: json["username"],
+    password: '',
+    active: json["active"],
+  );
 
   Map<String, dynamic> toJson() => {
         "id": id,

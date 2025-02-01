@@ -1,6 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_dignal_2023/models/models.dart';
+import 'package:flutter_dignal_2025/models/models.dart';
 
 class DeviceFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -38,28 +37,6 @@ class DeviceFormProvider extends ChangeNotifier {
       formKey.currentState!.save();
       return true;
     }
-    return false;
-  }
-
-  Future<bool> createDevice() async {
-    _isLoading = true;
-    _errors = {};
-    var created = false;
-    notifyListeners();
-
-    await Future.delayed(Duration(seconds: 2));
-    _isLoading = false;
-    notifyListeners();
-    return created;
-  }
-
-  Future<bool> updateDevice() async {
-    _isLoading = true;
-    _errors = {};
-    notifyListeners();
-    await Future.delayed(Duration(seconds: 2));
-    _isLoading = false;
-    notifyListeners();
     return false;
   }
 }
