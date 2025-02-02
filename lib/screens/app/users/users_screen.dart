@@ -48,6 +48,7 @@ class UsersScreen extends StatelessWidget {
                     final usersProvider =
                         Provider.of<UsersProvider>(context, listen: false);
                     usersProvider.selectedUser = user;
+                    usersProvider.isNewUser = false;
                     Navigator.of(context).pushNamed(UsersFormScreen.route);
                   },
                   onLongPress: () {
@@ -97,6 +98,7 @@ class UsersScreen extends StatelessWidget {
           final usersProvider =
               Provider.of<UsersProvider>(context, listen: false);
           usersProvider.selectedUser = User();
+          usersProvider.isNewUser = true;
           Navigator.of(context).pushNamed(UsersFormScreen.route);
         },
       ),

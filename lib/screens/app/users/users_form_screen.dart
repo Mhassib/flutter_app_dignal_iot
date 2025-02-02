@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dignal_2025/providers/user_form_provider.dart';
 import 'package:flutter_dignal_2025/providers/users_provider.dart';
+import 'package:flutter_dignal_2025/services/my_server.dart';
 import 'package:provider/provider.dart';
 
 class UsersFormScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class UsersFormScreen extends StatelessWidget {
     final userProvider = Provider.of<UsersProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Crear usuario'),
+        title: Text(userProvider.isNewUser ? 'Crear usuario' : 'Editar usuario'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -104,7 +105,34 @@ class UserForm extends StatelessWidget {
                           context,
                           listen: false,
                         );
+
+                        userForm.isLoading = true;
+
+                        // Usuario nuevo: name, username y password
+                        // Usuario editado: id, name, username y active
+                        if (user.id == null) {
+                          await MyServer().createUser(user);
+                        } else {
+                          await MyServer().updateUser(user);
+                        }
+
+                        await Future.delayed(Duration(seconds: 2));
+
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              user.id == null
+                              ? 'Se ha creado el nuevo usuario'
+                              : 'Se han guardado los cambios'
+                            ),
+                            backgroundColor: Colors.green,
+                          )
+                        );
+
+                        usersProvider.getUsers();
                         Navigator.of(context).pop();
+                        userForm.isLoading = false;
                       }
                     },
               child: userForm.isLoading
@@ -112,7 +140,7 @@ class UserForm extends StatelessWidget {
                       padding: EdgeInsets.all(5),
                       child: CircularProgressIndicator.adaptive(),
                     )
-                  : Text(user.id == null ? 'Create' : 'Update'),
+                  : Text(user.id == null ? 'Crear' : 'Actualizar'),
             ),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dignal_2025/models/models.dart';
+import 'package:flutter_dignal_2025/services/my_server.dart';
 
 class DevicesProvider extends ChangeNotifier {
   DevicesProvider() {
@@ -26,10 +27,19 @@ class DevicesProvider extends ChangeNotifier {
   }
 
   getDevices() async {
-    print('getDevices');
     _isLoading = true;
     notifyListeners();
-    await Future.delayed(Duration(seconds: 3));
+    // await Future.delayed(Duration(seconds: 3));
+
+
+    final devicesList = await MyServer().getDevices();
+
+    if (devicesList == null) {
+      return null;
+    }
+
+    devices = devicesList;
+
     _isLoading = false;
     notifyListeners();
   }
