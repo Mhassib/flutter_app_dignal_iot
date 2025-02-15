@@ -1,22 +1,16 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_dignal_2025/models/models.dart';
+import 'package:flutter_dignal_2025/services/my_server.dart';
 
 class UsersProvider extends ChangeNotifier {
   UsersProvider() {
     getUsers();
   }
 
+  bool isNewUser = true;
+
   late User selectedUser;
-  List<User> users = List.generate(
-    16,
-    (index) => User(
-      id: index,
-      name: 'User ${index + 1}',
-      username: 'Username $index',
-      active: Random().nextBool(),
-    ),
-  );
+
   bool _isLoading = false;
   get isLoading => _isLoading;
   set isLoading(val) {
@@ -24,13 +18,27 @@ class UsersProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // List<User> users = [];
+  List<User> users = [];
 
   getUsers() async {
-    print('getUsers');
     _isLoading = true;
     notifyListeners();
-    await Future.delayed(Duration(seconds: 3));
+
+
+
+
+    final usersList = await MyServer().getUsers();
+
+    // Opción 1: Recibir un elemento de tipo List > User
+    // Opción 2: null
+    if (usersList == null) {
+      return null;
+    }
+
+    users = usersList;
+
+
+
     _isLoading = false;
     notifyListeners();
   }

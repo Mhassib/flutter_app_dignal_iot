@@ -33,4 +33,10 @@ class DevicesProvider extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+
+  void initSocket() {
+    final socket = MyServer().socket;
+
+    socket.connect();
+  }
 }

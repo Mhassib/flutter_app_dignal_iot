@@ -2,12 +2,23 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dignal_2025/models/models.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class MyServer {
-  static String server = "192.168.1.152";
+  static String server = "192.168.1.22";
   static String portApi = "88";
+  static String portSocket = '3000';
   static final String _baseUrlApi = "$server:$portApi";
   
+  // http://localhost:3000
+  IO.Socket socket = IO.io(
+    'http://$server:$portSocket',
+    IO.OptionBuilder()
+      .setTransports(['websocket'])
+      .disableAutoConnect()
+      .build()
+  );
+
   Future<http.Response?> login({
     String username = '',
     String password = '',
